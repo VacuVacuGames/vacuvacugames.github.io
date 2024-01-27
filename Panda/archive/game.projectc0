@@ -10,14 +10,14 @@ title_as_file_name = Panda
 [display]
 width = 1031
 height = 580
-high_dpi = 0
+high_dpi = 1
 samples = 0
 fullscreen = 0
 update_frequency = 144
 swap_interval = 1
 vsync = 1
 display_profiles = /builtins/render/default.display_profilesc
-dynamic_orientation = 0
+dynamic_orientation = 1
 display_device_info = 0
 
 [render]
@@ -160,9 +160,9 @@ archive_location_suffix =
 engine_arguments = --verify-graphics-calls=false
 wasm_streaming = 0
 show_fullscreen_button = 1
-show_made_with_defold = 1
+show_made_with_defold = 0
 show_console_banner = 1
-scale_mode = downscale_fit
+scale_mode = fit
 
 [particle_fx]
 max_count = 64
