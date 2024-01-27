@@ -162,7 +162,7 @@ wasm_streaming = 0
 show_fullscreen_button = 1
 show_made_with_defold = 0
 show_console_banner = 1
-scale_mode = fit
+scale_mode = downscale_fit
 
 [particle_fx]
 max_count = 64
