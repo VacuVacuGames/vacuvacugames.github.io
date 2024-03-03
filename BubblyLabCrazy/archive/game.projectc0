@@ -1,6 +1,6 @@
 [project]
-title = BubblyLab
-version = 1.0
+title = Bubbly Lab
+version = 
 write_log = 0
 compress_archive = 1
 publisher = unnamed
@@ -8,8 +8,8 @@ developer = unnamed
 title_as_file_name = BubblyLab
 
 [display]
-width = 1128
-height = 615
+width = 1031
+height = 580
 high_dpi = 1
 samples = 0
 fullscreen = 0
@@ -160,10 +160,10 @@ archive_location_prefix = archive
 archive_location_suffix = 
 engine_arguments = --verify-graphics-calls=false
 wasm_streaming = 0
-show_fullscreen_button = 1
+show_fullscreen_button = 0
 show_made_with_defold = 0
 show_console_banner = 0
-scale_mode = downscale_fit
+scale_mode = fit
 
 [particle_fx]
 max_count = 64
@@ -207,4 +207,7 @@ fixed_update_frequency = 60
 
 [native_extension]
 app_manifest = /main/app_manifest.appmanifest
+
+[gamedistribution]
+game_id = 22066d25f1f3438e8a46c6b4d0c2fbc7
 
