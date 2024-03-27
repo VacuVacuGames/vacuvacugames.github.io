@@ -91,13 +91,13 @@
 	}
 
 	.buttons-background {
-		background-color: #ffffff;
+		background-color: #b5e0e8;
 		width: 100%;
 		height: 42px;
 	}
 
 	body {
-		background-color: #ffffff;
+		background-color: #b5e0e8;
 	}
 
 	.canvas-app-container {
@@ -115,21 +115,62 @@
 		background-repeat:no-repeat;
 		background-position: center center;
 		background-image: url("loader.jpg");
-background-size: 100.6% auto
+background-size: 100% auto
 	}
 	</style> 
   <script src="https://sdk.crazygames.com/crazygames-sdk-v2.js"></script>
   <script>
 		window.CrazyGames.SDK.game.sdkGameLoadingStart();
 	</script>
+  <script type="text/javascript">
+            (function (d) {
+                window.YaGamesPrivate_MsgQueue = [];
+                var send = function (cb_id, message_id, message) {
+                    if (typeof YaGamesPrivate !== "undefined") {
+                        YaGamesPrivate.send(cb_id, message_id, message);
+                    } else {
+                        YaGamesPrivate_MsgQueue.push([cb_id, message_id, message]);
+                    }
+                };
+
+                var t = d.getElementsByTagName("script")[0];
+                var s = d.createElement("script");
+                s.src = "https://yandex.ru/games/sdk/v2";
+                s.async = true;
+                t.parentNode.insertBefore(s, t);
+                s.onload = function () {
+                    var options;
+                    // 
+
+                    YaGames.init(options)
+                        .then(function (ysdk) {
+                            // 
+
+                            // 
+
+                            send(0, "init", ysdk);
+                        })
+                        .catch(function (err) {
+                            send(0, "error", err + "");
+                        });
+                };
+                s.onerror = function () {
+                    send(0, "error", "Error loading SDK. Reload the page.");
+                };
+            })(document);
+        </script>
  </head> 
  <body> 
-  <div id="running-from-file-warning" style="display: none; margin: 3em;"> 
-   <h1>Running from local file ⚠️</h1> 
-   <p>It seems like you have opened this file by double-clicking on it. In order to test your build in a browser <b>you need to load this file from a web server</b>. You can either upload this file and the rest of the files from a Defold HTML5 bundle to a web hosting service OR host them using a local web server on your home network.</p> 
-   <p><a href="https://defold.com/manuals/html5/#testing-html5-build" target="_blank">Learn more about running a local web server in the Defold HTML5 manual</a>.</p> 
-  </div> 
   <div id="app-container" class="canvas-app-container"> 
+   <div id="running-from-file-warning" style="display: none; margin: 3em;"> 
+    <h1>Running from local file ⚠️</h1> 
+    <p>It seems like you have opened this file by double-clicking on it. In order to test your build in a browser <b>you need to load this file from a web server</b>. You can either upload this file and the rest of the files from a Defold HTML5 bundle to a web hosting service OR host them using a local web server on your home network.</p> 
+    <p><a href="https://defold.com/manuals/html5/#testing-html5-build" target="_blank">Learn more about running a local web server in the Defold HTML5 manual</a>.</p> 
+   </div> 
+   <div id="webgl-not-supported" style="display: none; margin: 3em;"> 
+    <h1>WebGL not supported ⚠️</h1> 
+    <p>WebGL is not supported by your browser - visit <a href="https://get.webgl.org/">https://get.webgl.org/</a> to learn more.</p> 
+   </div> 
    <div id="canvas-container" class="canvas-app-canvas-container"> 
     <canvas id="canvas" class="canvas-app-canvas" tabindex="1" width="1128" height="615"></canvas> 
    </div> 
@@ -147,8 +188,16 @@ background-size: 100.6% auto
 		engine_arguments: ["--verify-graphics-calls=false",],
 		custom_heap_size: 268435456,
 		full_screen_container: "#canvas-container",
-		disable_context_menu: true
+		disable_context_menu: true,
+		retry_time:1.0,
+		retry_count:10,
+		unsupported_webgl_callback: function() {
+			var e = document.getElementById("webgl-not-supported");
+			e.style.display = "block";
+		}
 	}
+
+	Module['persistentStorage'] = (typeof window !== 'undefined') && !!(window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB);
 
 	Module['INITIAL_MEMORY'] = extra_params.custom_heap_size;
 
